@@ -1,7 +1,7 @@
-FLEX_SDK ?= /usr/local/flex_sdk_4
-MXMLC ?= $(FLEX_SDK)/bin/mxmlc
-COMPC ?= $(FLEX_SDK)/bin/compc
-BUILD_DIR ?= build
+FLEX_SDK = /Users/kentwei15/flashsdk
+MXMLC = $(FLEX_SDK)/bin/mxmlc
+COMPC = $(FLEX_SDK)/bin/compc
+BUILD_DIR = build
 GRIND_PLAYER=$(BUILD_DIR)/GrindPlayer.swf
 GRIND_FRAMEWORK=$(BUILD_DIR)/libs/GrindFramework.swc
 ADVERTISEMENT_PLUGIN=$(BUILD_DIR)/libs/AdvertisementPlugin.swc
@@ -34,7 +34,8 @@ $(BUILD_DIR)/libs:
 $(GRIND_PLAYER): $(BUILD_DIR) $(GRIND_FRAMEWORK) $(ADVERTISEMENT_PLUGIN) $(SUBTITLES_PLUGIN) $(SRC)
 	$(MXMLC) -o $(GRIND_PLAYER) \
 	-debug=$(DEBUG) \
-	-locale=en_US,ru_RU \
+	-actionscript-file-encoding=utf-8 \
+	-locale=zh_CN \
 	-swf-version=11 \
 	-target-player=$(TARGET_PLAYER) \
 	-default-size=640,360 \
@@ -42,8 +43,6 @@ $(GRIND_PLAYER): $(BUILD_DIR) $(GRIND_FRAMEWORK) $(ADVERTISEMENT_PLUGIN) $(SUBTI
 	-sp src locale/{locale} \
 	-l "$(FLEX_SDK)/frameworks/libs" "$(FLEX_SDK)/frameworks/locale/{locale}" \
 	-l libs "$(BUILD_DIR)/libs" \
-	-externs ru.kutu.osmf.advertisement.AdvertisementPlugin \
-	-externs ru.kutu.osmf.subtitles.SubtitlesPlugin \
 	-define CONFIG::HLS false \
 	-define CONFIG::DEV false \
 	src/GrindPlayer.mxml \
