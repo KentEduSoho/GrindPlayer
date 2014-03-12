@@ -1,9 +1,6 @@
 @namespace s "library://ns.adobe.com/flex/spark";
 
-@font-face {
-	src: url("../assets/font/OpenSans-Regular.ttf");
-	fontFamily: "Open Sans";
-}
+
 
 global {
 	/* main theme color */

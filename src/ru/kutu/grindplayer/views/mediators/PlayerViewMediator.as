@@ -14,9 +14,7 @@ package ru.kutu.grindplayer.views.mediators {
 	
 	import ru.kutu.grind.views.mediators.PlayerViewBaseMediator;
 	import ru.kutu.grindplayer.config.GrindPlayerConfiguration;
-	import ru.kutu.grindplayer.events.AdvertisementEvent;
 	import ru.kutu.grindplayer.events.PlayerVideoZoomEvent;
-	import ru.kutu.osmf.advertisement.AdvertisementPluginInfo;
 	import ru.kutu.osmf.subtitles.SubtitlesPluginInfo;
 	
 	CONFIG::HLS {
@@ -27,16 +25,10 @@ package ru.kutu.grindplayer.views.mediators {
 		
 		private var _zoom:int;
 		
-		override public function initialize():void {
-			super.initialize();
-			addContextListener(AdvertisementEvent.ADVERTISEMENT, onAdvertisement, AdvertisementEvent);
-		}
+
 		
 		override protected function processConfiguration(flashvars:Object):void {
-			CONFIG::DEV {
-				flashvars.src = "";
-			}
-			
+	
 			if ("locale" in flashvars) {
 				var locale:String = flashvars.locale;
 				var resourceManager:IResourceManager = ResourceManager.getInstance();
@@ -73,7 +65,6 @@ package ru.kutu.grindplayer.views.mediators {
 		
 		override protected function addCustomPlugins(pluginConfigurations:Vector.<MediaResourceBase>):void {
 			pluginConfigurations.push(new PluginInfoResource(new SubtitlesPluginInfo()));
-			pluginConfigurations.push(new PluginInfoResource(new AdvertisementPluginInfo()));
 			CONFIG::HLS {
 				pluginConfigurations.push(new PluginInfoResource(new OSMFHLSPluginInfo(contextView.view.loaderInfo)));
 			}
@@ -126,25 +117,7 @@ package ru.kutu.grindplayer.views.mediators {
 				: configuration.controlBarFullScreenAutoHide;
 		}
 		
-		private function onAdvertisement(event:AdvertisementEvent):void {
-			// check at least one ad has layoutInfo and isAdvertisement
-			var isAdvertisement:Boolean;
-			if (event.ads && event.ads is Array) {
-				for each (var item:Object in event.ads) {
-					if ("layoutInfo" in item && !item.layoutInfo && "isAdvertisement" in item && item.isAdvertisement) {
-						isAdvertisement = true;
-						break;
-					}
-				}
-			}
-			
-			// remove main media from videoContainer if ad is linear
-			if (isAdvertisement && videoContainer.containsMediaElement(player.media)) {
-				videoContainer.removeMediaElement(player.media);
-			} else if (!isAdvertisement && !videoContainer.containsMediaElement(player.media)) {
-				videoContainer.addMediaElement(player.media);
-			}
-		}
+
 		
 	}
 	
