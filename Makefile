@@ -47,7 +47,7 @@ $(GRIND_PLAYER): $(BUILD_DIR) $(GRIND_FRAMEWORK)  $(SRC)
 
 
 GrindFramework:
-	git clone git://github.com/kutu/GrindFramework --depth 1
+	git clone https://github.com/KentEduSoho/GrindFramework.git --depth 1
 
 
 $(GRIND_FRAMEWORK): GrindFramework
