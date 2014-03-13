@@ -68,11 +68,13 @@
 		</s:fill>
 	</s:Ellipse>
 	
+
 	<s:Label
 		id="labelDisplay"
 		left="12"
 		right="12"
 		verticalCenter="0"
+		fontSize="13"
 		/>
 	
 </s:ItemRenderer>

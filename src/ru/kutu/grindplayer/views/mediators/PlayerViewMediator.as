@@ -15,7 +15,6 @@ package ru.kutu.grindplayer.views.mediators {
 	import ru.kutu.grind.views.mediators.PlayerViewBaseMediator;
 	import ru.kutu.grindplayer.config.GrindPlayerConfiguration;
 	import ru.kutu.grindplayer.events.PlayerVideoZoomEvent;
-	import ru.kutu.osmf.subtitles.SubtitlesPluginInfo;
 	
 	CONFIG::HLS {
 		import ru.kutu.osmf.hls.OSMFHLSPluginInfo;
@@ -63,12 +62,7 @@ package ru.kutu.grindplayer.views.mediators {
 			}
 		}
 		
-		override protected function addCustomPlugins(pluginConfigurations:Vector.<MediaResourceBase>):void {
-			pluginConfigurations.push(new PluginInfoResource(new SubtitlesPluginInfo()));
-			CONFIG::HLS {
-				pluginConfigurations.push(new PluginInfoResource(new OSMFHLSPluginInfo(contextView.view.loaderInfo)));
-			}
-		}
+	
 		
 		override protected function initializeView():void {
 			super.initializeView();
@@ -116,9 +110,7 @@ package ru.kutu.grindplayer.views.mediators {
 				? configuration.controlBarAutoHide
 				: configuration.controlBarFullScreenAutoHide;
 		}
-		
-
-		
+	
 	}
 	
 }

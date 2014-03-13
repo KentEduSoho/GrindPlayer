@@ -5,7 +5,7 @@ BUILD_DIR = build
 GRIND_PLAYER=$(BUILD_DIR)/GrindPlayer.swf
 GRIND_FRAMEWORK=$(BUILD_DIR)/libs/GrindFramework.swc
 #ADVERTISEMENT_PLUGIN=$(BUILD_DIR)/libs/AdvertisementPlugin.swc
-SUBTITLES_PLUGIN=$(BUILD_DIR)/libs/SubtitlesPlugin.swc
+#SUBTITLES_PLUGIN=$(BUILD_DIR)/libs/SubtitlesPlugin.swc
 
 DEBUG ?= false
 LOGGING ?= false
@@ -28,7 +28,7 @@ $(BUILD_DIR)/libs:
 	mkdir -p $(BUILD_DIR)/libs
 	cp libs/* $(BUILD_DIR)/libs/
 
-$(GRIND_PLAYER): $(BUILD_DIR) $(GRIND_FRAMEWORK)  $(SUBTITLES_PLUGIN) $(SRC)
+$(GRIND_PLAYER): $(BUILD_DIR) $(GRIND_FRAMEWORK)  $(SRC)
 	$(MXMLC) -o $(GRIND_PLAYER) \
 	-debug=$(DEBUG) \
 	-actionscript-file-encoding=utf-8 \
@@ -62,18 +62,4 @@ $(GRIND_FRAMEWORK): GrindFramework
 	-define CONFIG::LOGGING $(LOGGING) \
 	-define CONFIG::FLASH_10_1 true
 
-
-SubtitlesPlugin:
-	git clone git://github.com/kutu/SubtitlesPlugin --depth 1
-
-$(SUBTITLES_PLUGIN): SubtitlesPlugin
-	$(COMPC) -o $(SUBTITLES_PLUGIN) \
-	-debug=$(DEBUG) \
-	-swf-version=11 \
-	-optimize=true \
-	-target-player=$(TARGET_PLAYER) \
-	-sp "SubtitlesPlugin/src" \
-	-is "SubtitlesPlugin/src" \
-	-external-library-path+="$(FLEX_SDK)/frameworks/libs",libs \
-	-define CONFIG::LOGGING $(LOGGING)
 

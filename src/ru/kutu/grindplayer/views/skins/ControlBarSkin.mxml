@@ -70,15 +70,15 @@
 
 			<s:Spacer width="100%" />
 
-			<components:SubtitlesMenuButton
+			<!--components:SubtitlesMenuButton
 				width="30"
 				skinClass="ru.kutu.grindplayer.views.skins.SubtitlesMenuSkin"
-				/>
+				/-->
 
-			<components:AlternateMenuButton
+			<!--components:AlternateMenuButton
 				width="26"
 				skinClass="ru.kutu.grindplayer.views.skins.AlternateMenuSkin"
-				/>
+				/-->
 
 			<components:QualityMenuButton
 				width="32"
